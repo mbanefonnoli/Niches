@@ -1,0 +1,6 @@
+date,job,concept,asset_file,format,model_or_tool,est_cost_eur,actual_cost_eur,attempts,approved,ad_spend_eur,ctr,cost_per_result_eur,notes
+2026-11-10,winter-hoodie,warm-outside-calm-inside,Design canvas Main.dc.html,4:5,HTML layout on Design canvas,0,0,2,,,,,"v2 uses AI-edited model photo; print mismatch open"
+2026-11-10,winter-hoodie,winter-gift,Design canvas Square.dc.html,1:1,HTML layout on Design canvas,0,0,1,,,,,"real product photo only"
+2026-11-10,winter-hoodie,winter-gift,Design canvas SquareModel.dc.html,1:1,HTML layout on Design canvas,0,0,1,,,,,"AI-edited model photo; print mismatch open"
+2026-11-10,winter-hoodie,model-image,assets/model-wearing-hoodie_AI-edited.jpg,9:16,Nano Banana edit,,,1,n,,,,"print typeface and verse layout differ from real product"
+2026-11-10,winter-hoodie,winter-gift,outputs/2026-11-10_winter-gift_9x16_v2.mp4,9:16,Python frames + ffmpeg,0,0,2,,,,,"16 s, silent; v1 (gift photo, no hoodie) replaced"
