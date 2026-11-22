@@ -57,6 +57,12 @@ def amp_img(size, fill):
     f = F(CHORUS, size); tmp = Image.new("RGBA", (size * 2, size * 2), (0, 0, 0, 0))
     ImageDraw.Draw(tmp).text((size * 0.4, size * 0.1), "&", font=f, fill=fill + (255,)); return tmp.crop(tmp.getbbox())
 
+def arrow_img(length, color, w=7):
+    im = Image.new("RGBA", (length + 40, 80), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.line([6, 40, length + 6, 40], fill=color + (255,), width=w)
+    d.polygon([(length + 36, 40), (length - 8, 12), (length + 2, 40), (length - 8, 68)], fill=color + (255,))
+    return im
+
 def snowflake(draw, cx, cy, r, fill, w=3):
     for k in range(6):
         a = math.pi / 3 * k
@@ -88,7 +94,7 @@ def make_cover():
     x0 = (CW - (2 * bd + gap)) // 2
     b1, b2 = badge(bd), badge_b(bd)
     art.paste(b1, (x0, 885), b1); art.paste(b2, (x0 + bd + gap, 885), b2)
-    am = amp_img(86, GOLD); art.paste(am, (CW // 2 - am.width // 2, 885 + bd // 2 - am.height // 2), am)
+    ar = arrow_img(gap - 44, GOLD, 6); art.paste(ar, (x0 + bd + 10, 885 + bd // 2 - 40), ar)
     return art
 
 def make_inner_left():
@@ -103,13 +109,11 @@ def make_inner_left():
         x, y, r = rng.integers(40, CW - 40), rng.integers(40, CH_ - 40), int(rng.integers(14, 44))
         if abs(x - CW / 2) < 230 and abs(y - 560) < 260: continue
         snowflake(d, x, y, r, (255, 255, 255, int(rng.integers(70, 160))), 2)
-    b1, b2 = badge(300), badge_b(300)
-    g.paste(b1, ((CW - 300) // 2, 215), b1); g.paste(b2, ((CW - 300) // 2, 700), b2)
-    am = amp_img(110, (255, 255, 255)); g.paste(am, (CW // 2 - am.width // 2, 618 - am.height // 2), am)
-    d.text(((CW - d.textlength("optimastore.ro", font=F(SANS, 34))) / 2, 1035), "optimastore.ro", font=F(SANS, 34), fill=(255, 255, 255, 220))
+    b1 = badge(330); g.paste(b1, ((CW - 330) // 2, 395), b1)
+    d.text(((CW - d.textlength("optimastore.ro", font=F(SANS, 34))) / 2, 790), "optimastore.ro", font=F(SANS, 34), fill=(255, 255, 255, 220))
     return paper_noise(g, 3)
 
-MSG = [("Dragi clienți și parteneri,", 70, 0, 0.0),
+MSG = [("Dragă echipă Bosfor Anatolya,", 62, 0, 0.0),
        ("vă mulțumim pentru încrederea", 58, 0, 0.5),
        ("pe care ne-ați acordat-o", 58, 0, -0.4),
        ("în acest an.", 58, 0, 0.3),
@@ -118,8 +122,7 @@ MSG = [("Dragi clienți și parteneri,", 70, 0, 0.0),
        ("și un An Nou cu sănătate", 58, 0, -0.5),
        ("și realizări!", 58, 0, 0.3),
        ("Cu drag,", 62, 0, -0.3),
-       ("Optima Store", 76, 120, 0.5),
-       ("& Bosfor Anatolya", 76, 170, -0.3)]
+       ("Echipa Optima Store", 80, 110, 0.5)]
 
 def make_right():
     paper = Image.new("RGB", (CW, CH_), IVORY)
@@ -139,7 +142,7 @@ def make_right():
         tmp = tmp.rotate(rot, resample=Image.BICUBIC, expand=True)
         x = 100 + indent + (6 if rot > 0 else 0)
         ly = y if txt != "Cu drag," else y + 28
-        if txt.startswith("Optima"): ly = y + 12
+        if txt.startswith("Echipa"): ly = y + 20
         a = np.asarray(tmp, np.float32) / 255
         ink[ly:ly + a.shape[0], x:x + a.shape[1]] = np.maximum(ink[ly:ly + a.shape[0], x:x + a.shape[1]], a)
         lines.append((x, ly, x + a.shape[1], ly + a.shape[0]))
@@ -164,6 +167,11 @@ def make_env():
     fd.line([0, 78, ew / 2, 22], fill=(255, 255, 255, 140), width=3)
     fd.line([ew, 78, ew / 2, 22], fill=(255, 255, 255, 140), width=3)
     front.paste(fb, (0, 0), mask)
+    lab = Image.new("RGBA", (440, 150), (0, 0, 0, 0)); ld = ImageDraw.Draw(lab)
+    ld.rounded_rectangle([0, 0, 439, 149], radius=14, fill=(251, 246, 236, 255))
+    ld.text((30, 14), "Pentru", font=F(CHORUS, 40), fill=BLUE + (255,))
+    ld.text((30, 58), "Bosfor Anatolya", font=F(CHORUS, 62), fill=INK + (255,))
+    front.paste(lab, ((ew - 440) // 2, 640), lab)
     # flap
     fh = 430
     tri = Image.new("L", (ew, fh), 0); ImageDraw.Draw(tri).polygon([(0, 0), (ew, 0), (ew / 2, fh)], fill=255)
@@ -384,8 +392,8 @@ def end_card(t, tl):
     x0 = (W - (2 * bd + gap)) // 2
     for bb, xx in ((badge(bd), x0), (badge_b(bd), x0 + bd + gap)):
         c.paste(bb, (xx, 520), bb.getchannel("A").point(lambda v: int(v * s)))
-    am = amp_img(150, GOLD); am.putalpha(am.getchannel("A").point(lambda v: int(v * s)))
-    c.paste(am, (W // 2 - am.width // 2, 520 + bd // 2 - am.height // 2), am)
+    ar = arrow_img(gap - 50, GOLD, 8); ar.putalpha(ar.getchannel("A").point(lambda v: int(v * s)))
+    c.paste(ar, (x0 + bd + 18, 520 + bd // 2 - 40), ar)
     d = ImageDraw.Draw(c)
     def ctext(txt, f, y, fill, a):
         im = Image.new("RGBA", (W, f.size * 2), (0, 0, 0, 0)); dd = ImageDraw.Draw(im)
@@ -393,8 +401,8 @@ def end_card(t, tl):
         c.paste(im.convert("RGB"), (0, y), im.getchannel("A"))
     ctext("Crăciun fericit!", F(CHORUS, 150), 1010, IVORY, E(tl, 0.5, 1.2))
     ctext("Vă mulțumim pentru încredere.", F(CHORUS, 64), 1230, GOLD, E(tl, 0.9, 1.6))
-    ctext("Optima Store & Bosfor Anatolya", F(SANS, 38), 1420, (220, 228, 245), E(tl, 1.3, 1.9))
-    ctext("optimastore.ro", F(SANS, 38), 1490, (220, 228, 245), E(tl, 1.5, 2.1))
+    ctext("Cu drag, Optima Store", F(CHORUS, 64), 1400, IVORY, E(tl, 1.3, 1.9))
+    ctext("optimastore.ro", F(SANS, 38), 1535, (220, 228, 245), E(tl, 1.5, 2.1))
     snow(c, t, 0.7)
     return c
 
