@@ -14,7 +14,7 @@ How the pieces fit: generate the card artwork first (Part 1), then use those ima
 Elegant watercolor Christmas card front, portrait 3:4. A delicate border of snow-dusted pine branches, small red berries and tiny white snowflakes with a few gold flecks around all four edges. The large centre area is empty cream-white cold-press paper. Palette strictly steel blue (#4E6DA4), deep red (#A02B21), cream white, a little gold. Refined, airy, corporate-friendly, no people. No text, no letters, no numbers, no logos anywhere.
 ```
 
-Add the words on top afterwards: "Crăciun Fericit!" in red cursive (#A02B21), with the Optima Store logo on a small white round label near the bottom. This keeps the diacritics (ă) correct. This is how the card was made in Version 1 and Version 2.
+Add the words on top afterwards: "Crăciun Fericit!" in red cursive (#A02B21), with the two partner logos side by side near the bottom on small round labels, joined by a gold cursive "&": the Optima Store logo (white label) and the Bosfor Anatolya logo (green label). This keeps the diacritics (ă) correct. This is how the card was made in Version 1 and Version 2.
 
 ### 1B. Front cover with the text drawn by the model (only if you want to try it)
 
@@ -38,7 +38,8 @@ plin de lumină și bucurie,
 și un An Nou cu sănătate
 și realizări!
 Cu drag,
-Echipa Optima Store
+Optima Store
+& Bosfor Anatolya
 
 Keep the diacritics exactly: ă, â, î, ș, ț. No extra words.
 ```
@@ -46,7 +47,7 @@ Keep the diacritics exactly: ă, â, î, ș, ț. No extra words.
 ### 1D. Inside left page
 
 ```
-The inside left page of a greeting card, portrait 3:4: deep blue (#3B5688) with a soft vertical gradient and delicate white snowflakes, a white round label in the centre. (Place the real Optima Store logo on the label in an editor.) Small white text under the label: "optimastore.ro".
+The inside left page of a greeting card, portrait 3:4: deep blue (#3B5688) with a soft vertical gradient and delicate white snowflakes, two round labels stacked in the centre with a white cursive "&" between them. (Place the real Optima Store logo on the top label and the real Bosfor Anatolya logo on the bottom label in an editor.) Small white text at the bottom: "optimastore.ro".
 ```
 
 ---
@@ -66,7 +67,7 @@ HANDWRITING: elegant connected cursive calligraphy written with a fountain pen, 
 ```
 Vertical 9:16, 12 seconds, 24 fps, cinematic, soft warm light, shallow depth of field. Winter evening, warm out-of-focus string lights and gently falling snow in the background.
 
-0.0–1.5 s: Point-of-view. A person's hand in a dark navy coat sleeve (no face visible, natural hand with five fingers) holds out a steel-blue envelope with a white round Optima Store label on its pointed flap, and hands it to the camera. The envelope moves into the centre of the frame and settles in the viewer's two hands.
+0.0–1.5 s: Point-of-view. A person's hand in a dark navy coat sleeve (no face visible, natural hand with five fingers) holds out a steel-blue envelope with a white round Optima Store label on its pointed flap (the logos are added in post), and hands it to the camera. The envelope moves into the centre of the frame and settles in the viewer's two hands.
 1.5–3.0 s: A thumb lifts the pointed flap; the flap folds back and the inside lining shows. A greeting card begins to slide up out of the envelope.
 3.0–4.5 s: The card comes out fully and faces the camera: cream watercolor cover with snow-dusted pine branches, red berries and the red cursive words "Crăciun Fericit!".
 4.5–6.0 s: The card opens like a book (spine on the left). Left page deep blue with white snowflakes and a white round label; right page warm ivory paper.
@@ -89,7 +90,7 @@ Make each clip start from the last frame of the previous one (use the "start fra
 ### 3C. Negative prompt
 
 ```
-no face, no extra fingers, no deformed hands, no text other than the card text, no watermark, no subtitles, no brand logos other than the Optima Store label, no changes of spelling, no morphing letters, no flicker, no jump cuts, no sudden camera shake, no cartoon style
+no face, no extra fingers, no deformed hands, no text other than the card text, no watermark, no subtitles, no brand logos other than the Optima Store label, no invented logos, no changes of spelling, no morphing letters, no flicker, no jump cuts, no sudden camera shake, no cartoon style
 ```
 
 ---
@@ -103,8 +104,8 @@ no face, no extra fingers, no deformed hands, no text other than the card text, 
 5. **Consistency.** Use the same reference images (card front, inside, envelope, logo) in every clip, and a fixed seed if the model offers one.
 6. **Hands.** If hands look wrong, replace the hand with an envelope sliding in from the side, or a gloved hand.
 7. **Sound.** Soft music, paper rustle when the flap opens, a faint pen-scratch while writing. Record or add it separately, as models often skip it. No copyrighted music.
-8. **End card.** Add "Crăciun fericit!", the Optima Store logo and "optimastore.ro" as a 2 second overlay at the end, made in an editor.
+8. **End card.** Add "Crăciun fericit!", both logos (Optima Store and Bosfor Anatolya, joined by "&") and "optimastore.ro" as a 2 second overlay at the end, made in an editor.
 9. **AI disclosure.** If you post a generated video, mark it as AI-generated where the platform asks.
 10. **Language check.** Have a Romanian speaker read the final text once. A single wrong diacritic on a client greeting looks careless.
-11. **Open questions for Optima.** Is the card text what they want to say, and does it come from the whole team or one person? Is there a higher-resolution logo? What does the Bosfor Anatolya logo you sent relate to (it is not used in these versions)?
+11. **Open questions.** Is the card text approved by both Optima Store and Bosfor Anatolya, and does Bosfor Anatolya have a website or line to show on the end card? Are higher-resolution logos available (the Optima file is 447 px and the Bosfor one 554 px)? Are the colours and the "&" arrangement fine with both brands?
 12. **Rights.** Before paid use, check three things: the commercial-use terms of your Kling plan for the cover artwork, the font licence (the handwriting font in Versions 1 and 2 is TeX Gyre Chorus, which ships with a free-use licence, but confirm it), and replace the synthesized music with licensed music.

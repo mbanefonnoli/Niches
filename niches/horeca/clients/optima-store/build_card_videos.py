@@ -45,6 +45,18 @@ def badge(d, ring=True):
     im.putalpha(ImageChops.multiply(im.getchannel("A"), m))
     return im.resize((d, d), Image.LANCZOS)
 
+BOSFOR = Image.open(AS("bosfor-anatolya-logo_original.jpg")).convert("RGB")
+def badge_b(d, ring=True):
+    im = BOSFOR.resize((d * 2, d * 2), Image.LANCZOS).convert("RGBA")
+    m = Image.new("L", im.size, 0); ImageDraw.Draw(m).ellipse([0, 0, d * 2 - 1, d * 2 - 1], fill=255)
+    if ring: ImageDraw.Draw(im).ellipse([8, 8, d * 2 - 9, d * 2 - 9], outline=GOLD + (255,), width=6)
+    im.putalpha(m)
+    return im.resize((d, d), Image.LANCZOS)
+
+def amp_img(size, fill):
+    f = F(CHORUS, size); tmp = Image.new("RGBA", (size * 2, size * 2), (0, 0, 0, 0))
+    ImageDraw.Draw(tmp).text((size * 0.4, size * 0.1), "&", font=f, fill=fill + (255,)); return tmp.crop(tmp.getbbox())
+
 def snowflake(draw, cx, cy, r, fill, w=3):
     for k in range(6):
         a = math.pi / 3 * k
@@ -72,7 +84,11 @@ def make_cover():
         d.text(((CW - w) / 2, y), txt, font=f, fill=RED)
     d.line([300, 835, 600, 835], fill=GOLD, width=4)
     for x in (270, 630): d.ellipse([x - 6, 829, x + 6, 841], fill=GOLD)
-    b = badge(210); art.paste(b, ((CW - 210) // 2, 880), b)
+    bd, gap = 190, 110
+    x0 = (CW - (2 * bd + gap)) // 2
+    b1, b2 = badge(bd), badge_b(bd)
+    art.paste(b1, (x0, 885), b1); art.paste(b2, (x0 + bd + gap, 885), b2)
+    am = amp_img(86, GOLD); art.paste(am, (CW // 2 - am.width // 2, 885 + bd // 2 - am.height // 2), am)
     return art
 
 def make_inner_left():
@@ -87,20 +103,23 @@ def make_inner_left():
         x, y, r = rng.integers(40, CW - 40), rng.integers(40, CH_ - 40), int(rng.integers(14, 44))
         if abs(x - CW / 2) < 230 and abs(y - 560) < 260: continue
         snowflake(d, x, y, r, (255, 255, 255, int(rng.integers(70, 160))), 2)
-    b = badge(330); g.paste(b, ((CW - 330) // 2, 395), b)
-    d.text(((CW - d.textlength("optimastore.ro", font=F(SANS, 34))) / 2, 790), "optimastore.ro", font=F(SANS, 34), fill=(255, 255, 255, 220))
+    b1, b2 = badge(300), badge_b(300)
+    g.paste(b1, ((CW - 300) // 2, 215), b1); g.paste(b2, ((CW - 300) // 2, 700), b2)
+    am = amp_img(110, (255, 255, 255)); g.paste(am, (CW // 2 - am.width // 2, 618 - am.height // 2), am)
+    d.text(((CW - d.textlength("optimastore.ro", font=F(SANS, 34))) / 2, 1035), "optimastore.ro", font=F(SANS, 34), fill=(255, 255, 255, 220))
     return paper_noise(g, 3)
 
-MSG = [("Dragi clienți și parteneri,", 74, 0, 0.0),
-       ("vă mulțumim pentru încrederea", 62, 0, 0.5),
-       ("pe care ne-ați acordat-o", 62, 0, -0.4),
-       ("în acest an.", 62, 0, 0.3),
-       ("Vă dorim un Crăciun liniștit,", 62, 0, -0.3),
-       ("plin de lumină și bucurie,", 62, 0, 0.4),
-       ("și un An Nou cu sănătate", 62, 0, -0.5),
-       ("și realizări!", 62, 0, 0.3),
-       ("Cu drag,", 68, 0, -0.3),
-       ("Echipa Optima Store", 80, 110, 0.5)]
+MSG = [("Dragi clienți și parteneri,", 70, 0, 0.0),
+       ("vă mulțumim pentru încrederea", 58, 0, 0.5),
+       ("pe care ne-ați acordat-o", 58, 0, -0.4),
+       ("în acest an.", 58, 0, 0.3),
+       ("Vă dorim un Crăciun liniștit,", 58, 0, -0.3),
+       ("plin de lumină și bucurie,", 58, 0, 0.4),
+       ("și un An Nou cu sănătate", 58, 0, -0.5),
+       ("și realizări!", 58, 0, 0.3),
+       ("Cu drag,", 62, 0, -0.3),
+       ("Optima Store", 76, 120, 0.5),
+       ("& Bosfor Anatolya", 76, 170, -0.3)]
 
 def make_right():
     paper = Image.new("RGB", (CW, CH_), IVORY)
@@ -120,12 +139,12 @@ def make_right():
         tmp = tmp.rotate(rot, resample=Image.BICUBIC, expand=True)
         x = 100 + indent + (6 if rot > 0 else 0)
         ly = y if txt != "Cu drag," else y + 28
-        if txt.startswith("Echipa"): ly = y + 20
+        if txt.startswith("Optima"): ly = y + 12
         a = np.asarray(tmp, np.float32) / 255
         ink[ly:ly + a.shape[0], x:x + a.shape[1]] = np.maximum(ink[ly:ly + a.shape[0], x:x + a.shape[1]], a)
         lines.append((x, ly, x + a.shape[1], ly + a.shape[0]))
-        y = ly + a.shape[0] + 26 if size < 70 else ly + a.shape[0] + 34
-        if txt == "în acest an.": y += 38
+        y = ly + a.shape[0] + 20 if size < 70 else ly + a.shape[0] + 26
+        if txt == "în acest an.": y += 34
     return paper, ink, lines
 
 # ------------------------------------------------------------------ envelope (drawn at 1x = 680x860)
@@ -361,8 +380,12 @@ def params_v1(t):
 
 def end_card(t, tl):
     c = bg_frame(t + 3)
-    b = badge(380); s = E(tl, 0, 0.7)
-    c.paste(b, ((W - 380) // 2, 560), b.point(lambda v: int(v * s)) if False else b.getchannel("A").point(lambda v: int(v * s)))
+    s = E(tl, 0, 0.7); bd, gap = 340, 150
+    x0 = (W - (2 * bd + gap)) // 2
+    for bb, xx in ((badge(bd), x0), (badge_b(bd), x0 + bd + gap)):
+        c.paste(bb, (xx, 520), bb.getchannel("A").point(lambda v: int(v * s)))
+    am = amp_img(150, GOLD); am.putalpha(am.getchannel("A").point(lambda v: int(v * s)))
+    c.paste(am, (W // 2 - am.width // 2, 520 + bd // 2 - am.height // 2), am)
     d = ImageDraw.Draw(c)
     def ctext(txt, f, y, fill, a):
         im = Image.new("RGBA", (W, f.size * 2), (0, 0, 0, 0)); dd = ImageDraw.Draw(im)
@@ -370,7 +393,8 @@ def end_card(t, tl):
         c.paste(im.convert("RGB"), (0, y), im.getchannel("A"))
     ctext("Crăciun fericit!", F(CHORUS, 150), 1010, IVORY, E(tl, 0.5, 1.2))
     ctext("Vă mulțumim pentru încredere.", F(CHORUS, 64), 1230, GOLD, E(tl, 0.9, 1.6))
-    ctext("optimastore.ro", F(SANS, 42), 1440, (220, 228, 245), E(tl, 1.3, 1.9))
+    ctext("Optima Store & Bosfor Anatolya", F(SANS, 38), 1420, (220, 228, 245), E(tl, 1.3, 1.9))
+    ctext("optimastore.ro", F(SANS, 38), 1490, (220, 228, 245), E(tl, 1.5, 2.1))
     snow(c, t, 0.7)
     return c
 

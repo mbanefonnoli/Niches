@@ -49,7 +49,7 @@ Only what the client confirmed in writing or publishes themselves. Copy must not
 ## Missing inputs
 
 - Confirmation that the card text is what Optima wants to say (draft written by us, Romanian).
-- Meaning of the Bosfor Anatolya logo sent with the Optima logo (related brand? sender? unused for now).
+- Bosfor Anatolya = partner brand (per user, 2026-11-22). Needs approval of the shared card, plus its web address if it should appear.
 - Higher-resolution logo; real product range (site unreachable from sandbox).
 
 ## Revision risks
