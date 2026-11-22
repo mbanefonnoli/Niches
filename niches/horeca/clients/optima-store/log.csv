@@ -1,0 +1,6 @@
+date,job,concept,asset_file,format,model_or_tool,est_cost_eur,actual_cost_eur,attempts,approved,ad_spend_eur,ctr,cost_per_result_eur,notes
+2026-11-22,xmas-card,cover-art,assets/card-cover-art_Kling-v4_2k.png,3:4 1760x2336,Kling image v4.0 2k text_to_image,,4 credits,1,y,,,,"text-free watercolor border; palette matches logo"
+2026-11-22,xmas-card,card-faces,outputs/2026-11-22_optima-christmas-card_front.png + _inside.png,3:4 / 2x 3:4,Pillow + TeX Gyre Chorus handwriting font,0,0,2,,,,,"v2: more space before second paragraph; RO text drafted by us, needs client OK"
+2026-11-22,xmas-card,video1-envelope,outputs/2026-11-22_optima-christmas-card_video1_envelope_9x16.mp4,9:16 17.8s,Pillow 3D transforms + ffmpeg + synthesized music,0,0,1,,,,,"envelope flap opens, card slides out, opens, handwriting written live with pen, end card"
+2026-11-22,xmas-card,video2-surprise,outputs/2026-11-22_optima-christmas-card_video2_surprise_9x16.mp4,9:16 17s,Pillow + ffmpeg + synthesized music,0,0,1,,,,,"light-writing 'Crăciun Fericit!' -> card flips in -> opens -> handwritten message -> end card"
+2026-11-22,xmas-card,video3-prompt,outputs/2026-11-22_optima-christmas-card_video3_AI-video-prompt.md,n/a,text prompt pack,0,0,1,,,,,"no video generated; card prompts + cursive spec + handoff/open/close/insert transition + missing items"
